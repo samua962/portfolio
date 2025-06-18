@@ -134,11 +134,15 @@
             <a href="https://www.facebook.com/yourusername" class="iconFacebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
         </div>
         
-        <p>&copy; 2025 Samuel Tesfaye. All rights reserved.</p>
+        <p >&copy; <span id="day"> 2020</span> Samuel Tesfaye. All rights reserved.</p>
     </div>
 </footer>
 
 <script>
+
+    let day=document.getElementById('day');
+    const year=new Date().getFullYear();
+    day.innerHTML=year;
     document.getElementById('contactForm').addEventListener('submit', function(event) {
         event.preventDefault();
         
