@@ -7,12 +7,121 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-    
-    (function() {
-        emailjs.init("YIx2wymXE8U3a6mqx"); 
-    })();
-</script>
+    <script>
+        (function() {
+            emailjs.init("YIx2wymXE8U3a6mqx"); 
+        })();
+    </script>
+    <style>
+        /* Progress bar styles */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background-color: #f0f0f0;
+            margin-top: 10px;
+            border-radius: 2px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #f0a500;
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+        
+        .button-container {
+            position: relative;
+        }
+        
+        .sending {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        /* Custom Dialog Styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .dialog-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .custom-dialog {
+            background: linear-gradient(135deg, #333, #555);
+            color: #f0a500;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .dialog-overlay.active .custom-dialog {
+            transform: translateY(0);
+        }
+        
+        .dialog-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .dialog-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #f0a500;
+        }
+        
+        .dialog-message {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #f4f4f4;
+            line-height: 1.5;
+        }
+        
+        .dialog-button {
+            background-color: #f0a500;
+            color: #333;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .dialog-button:hover {
+            background-color: #ffbf00;
+            transform: scale(1.05);
+        }
+        
+        .success-icon {
+            color: #4CAF50;
+        }
+        
+        .error-icon {
+            color: #f44336;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -28,9 +137,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projectt">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
-               
             </ul>
-       
         </div>
     </header>
 
@@ -40,7 +147,7 @@
             <h1 class="name">Samuel Tesfaye</h1>
             <h3 class="title">Fullstack Developer</h3>
             <p class="description">Passionate about building responsive, user-friendly applications with a strong foundation in web and software development.</p>
-            <a href="cv/myCv.pdf" class="cta-button" target="_blank">View My CV</a>
+            <a href="cv/Samuel Tesfaye.pdf" class="cta-button" target="_blank">View My Resume</a>
         </div>
         <div class="photo">
             <img class="image" src="image/photo.jpg" alt="Developer photo">
@@ -49,14 +156,14 @@
     <div class="about" id="about">
         <div class="aboutContent">
             <h2>About Me</h2>
-            <p>I’m a 22-year-old Computer Science student in my final year at Admas University.
-                 I’m passionate about creating applications that are both user-friendly and responsive.
+            <p>I'm a <span id="age"> age</span>-year-old Computer Science student in my final year at Admas University.
+                 I'm passionate about creating applications that are both user-friendly and responsive.
                   My academic background has prepared me with strong skills in software development,
                    critical thinking, and creativity.</p>
-            <p>I have experience with HTML/CSS, JavaScript, PHP, Java-based Android development, 
-                and the .NET Framework. My goal is to build intuitive and efficient digital solutions. 
-                I’m always motivated to learn new technologies and take on challenging projects
-                 to expand my knowledge and experience.
+            <p>With experience in both frontend and backend development, I build scalable applications with 
+                real-time functionality, authentication systems, and cross-platform compatibility. My goal is 
+                to create intuitive digital solutions that solve real-world problems while continuously expanding 
+                my expertise in emerging technologies.
             </p>
         </div>
     </div>
@@ -83,10 +190,23 @@
             <h3>.NET Framework (C#)</h3>
             <p>Skilled in building desktop and web applications using .NET and C#. Experienced with Visual Studio, SQL Server integration, and creating efficient, scalable software solutions.</p>
         </div>
+        <div class="skill-card">
+            <img src="image/react.png" alt="React Icon" class="skill-icon">
+            <h3>React.js</h3>
+            <p>Expert in building dynamic, component-based single-page applications with modern React, hooks, and state management for responsive web experiences.</p>
+        </div>
+        <div class="skill-card">
+            <img src="image/native.png" alt="React Native Icon" class="skill-icon">
+            <h3>React Native</h3>
+            <p>Proficient in cross-platform mobile app development, creating native-feeling applications for iOS and Android with seamless user experiences.</p>
+        </div>
+        <div class="skill-card">
+            <img src="image/firebase.png" alt="Firebase Icon" class="skill-icon">
+            <h3>Firebase</h3>
+            <p>Full-stack proficiency with Firebase including Firestore for real-time data, Authentication for secure user management, and Cloud Storage for media.</p>
+        </div>
     </div>
 </section>
-
-   
 
 <div class="projects" id="projectt">
     <h2>Projects</h2>
@@ -110,14 +230,33 @@
                 Created with HTML, CSS, and JavaScript, these mini projects 
                 demonstrate interactive web applications. Examples 
              to-do list, weather app, QR generator, quot generator and a quiz app 
-                with dynamic scoring and more. </p>
+                with dynamic scoring and more. 
+            <strong><a style="    color: #f0a500; text-decoration: none;" href="https://github.com/samua962" target="_blank">github</a> </strong></p>
         </div>
         <div class="project">
             <img class="hrmImage projectImage" src="image/hrmThree.jpg" alt="html Image">
             <h3>Human Resource Management System</h3>
             <p>A .NET WPF application designed for Admas University, 
                 featuring employee management, payroll, attendance 
-                tracking, and reporting. <a href="https://github.com/samua962/Admas-HRM.git" target="_blank">Click Here</a>  to see my code</p>
+                tracking, and reporting. <a style="    color: #f0a500; text-decoration: none;"href="https://github.com/samua962/Admas-HRM.git" target="_blank">Click Here</a>  to see my code</p>
+        </div>
+         <div class="project">
+            <img class="projectImage" src="image/recipe app icon.png" alt="Recipe App">
+            <h3> Recipe Hub</h3>
+            <p>A full-stack React Native mobile app with Firebase backend. Features user authentication, multi-language support (Amharic/English), offline access, recipe submission, and admin moderation system.
+   
+                  <strong> <a style="    color: #f0a500; text-decoration: none;" href="https://github.com/samua962/recipe-app" target="_blank">source code and screenshots</a></strong>
+            </p>
+            <p><strong>Tech:</strong> React Native, Firebase (Auth, Firestore, Storage)</p>
+        </div>
+           <div class="project">
+            <img class="projectImage" src="image/ofcourse.png" alt="OfCourse Coffee Website">
+            <h3>OfCourse Coffee - Food Ordering</h3>
+            <p>A React.js web application for online coffee and food ordering. Features daily inspirational quotes, latest news integration, and responsive design for optimal user experience.
+                <strong><a style="    color: #f0a500; text-decoration: none;" href="https://react-coffee-iota.vercel.app//" target="_blank">visit live site</a></strong>
+                source code: <strong> <a style="    color: #f0a500; text-decoration: none;" href="https://github.com/samua962/reactCoffee" target="_blank">GitHub Repo</a></strong>
+            </p>
+            <p><strong>Tech:</strong> React.js, Tailwind CSS, Mongodb</p>
         </div>
     </div>
 </div>
@@ -129,48 +268,149 @@
             <input type="email" id="email" name="email" placeholder="Your Email" required>
             <input type="text" id="subject" name="subject" placeholder="Your Subject" required>
             <textarea placeholder="Your Message" id="message" name="message" rows="4" required></textarea>
-            <button type="submit">Send Message</button>
+            <div class="button-container">
+                <button type="submit" id="submitButton">Send Message</button>
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
         </form>
-        <div class="social-icons">
+         <div class="social-icons">
             <a href="https://t.me/s_user_t" target="_blank" class="iconTelegram"><i class="fab fa-telegram-plane"></i></a>
-            <a href="https://www.tiktok.com/@yourusername" class="iconTiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.facebook.com/yourusername" class="iconFacebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://github.com/samua962" class="iconGithub" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="linkedin.com/in/samueltesfaye01" class="iconLinkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
         
         <p >&copy; <span id="day"> 2020</span> Samuel Tesfaye. All rights reserved.</p>
     </div>
 </footer>
 
-<script>
+<!-- Custom Dialog Element -->
+<div class="dialog-overlay" id="dialogOverlay">
+    <div class="custom-dialog">
+        <div class="dialog-icon" id="dialogIcon"></div>
+        <h2 class="dialog-title" id="dialogTitle"></h2>
+        <p class="dialog-message" id="dialogMessage"></p>
+        <button class="dialog-button" id="dialogButton">OK</button>
+    </div>
+</div>
 
-    let day=document.getElementById('day');
-    const year=new Date().getFullYear();
-    day.innerHTML=year;
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+<script>
+function calculateAge(birthDate) {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    // if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    //     age--;
+    // }
+    
+    return age;
+}
+
+// Custom Dialog Functions
+function showDialog(title, message, isSuccess) {
+    const dialogOverlay = document.getElementById('dialogOverlay');
+    const dialogIcon = document.getElementById('dialogIcon');
+    const dialogTitle = document.getElementById('dialogTitle');
+    const dialogMessage = document.getElementById('dialogMessage');
+    
+    // Set dialog content
+    dialogTitle.textContent = title;
+    dialogMessage.textContent = message;
+    
+    // Set icon based on success/error
+    if (isSuccess) {
+        dialogIcon.innerHTML = '<i class="fas fa-check-circle success-icon"></i>';
+    } else {
+        dialogIcon.innerHTML = '<i class="fas fa-exclamation-circle error-icon"></i>';
+    }
+    
+    // Show dialog
+    dialogOverlay.classList.add('active');
+    
+    // Add event listener to close button
+    document.getElementById('dialogButton').onclick = function() {
+        dialogOverlay.classList.remove('active');
+    };
+    
+    // Close dialog when clicking outside
+    dialogOverlay.onclick = function(event) {
+        if (event.target === dialogOverlay) {
+            dialogOverlay.classList.remove('active');
+        }
+    };
+}
+
+// Contact form script
+let day=document.getElementById('day');
+const year=new Date().getFullYear();
+day.innerHTML=year;
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Show progress bar and disable button
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const submitButton = document.getElementById('submitButton');
+    
+    progressContainer.style.display = 'block';
+    submitButton.classList.add('sending');
+    
+    // Simulate progress animation
+    let width = 0;
+    const progressInterval = setInterval(() => {
+        if (width >= 90) {
+            clearInterval(progressInterval);
+        } else {
+            width += 10;
+            progressBar.style.width = width + '%';
+        }
+    }, 200);
+    
+    // Get the form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    // Send the email using EmailJS
+    emailjs.send("service_7m3hk2t", "template_whbr8hm", {
+        subject: subject,
+        name: name,
+        email: email,
+        message: message,
+        time: new Date().toLocaleString()
+    })
+    .then(function(response) {
+        // Complete the progress bar
+        progressBar.style.width = '100%';
         
-        // Get the form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
-        
-        // Send the email using EmailJS
-        emailjs.send("service_7m3hk2t", "template_whbr8hm", {
-            subject: subject,
-            name: name,
-            email: email,
-            message: message,
-            time: new Date().toLocaleString()
-        })
-        .then(function(response) {
-            alert('Message sent successfully!');
+        // Wait a moment before showing success message
+        setTimeout(() => {
+            showDialog('Success!', 'Your message has been sent successfully. I will get back to you soon.', true);
             document.getElementById('contactForm').reset();
-        }, function(error) {
-            alert('Failed to send message. Please try again.');
-            console.error('EmailJS error:', error);
-        });
+            progressContainer.style.display = 'none';
+            submitButton.classList.remove('sending');
+            progressBar.style.width = '0%';
+        }, 300);
+    }, function(error) {
+        // Reset progress bar
+        progressContainer.style.display = 'none';
+        submitButton.classList.remove('sending');
+        progressBar.style.width = '0%';
+        
+        showDialog('Error', 'Failed to send message. Please try again later or contact me directly through my social media.', false);
+        console.error('EmailJS error:', error);
     });
+});
+
+// Set age
+const birthDate = '2002-07-12'; 
+const age = calculateAge(birthDate);
+document.getElementById('age').textContent = age;
 </script>
           
 </body>
