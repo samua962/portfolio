@@ -68,22 +68,60 @@ function initThemeToggle() {
 }
 
 // Mobile Menu
+// Mobile Menu with animations
 function initMobileMenu() {
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-  
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('active');
-    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-  });
-  
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('active');
-      document.body.style.overflow = '';
+    const menuToggle = document.getElementById('menuToggle');
+    const menuClose = document.getElementById('menuClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    const body = document.body;
+    
+    function openMenu() {
+        mobileMenu.classList.add('active');
+        menuToggle.classList.add('active');
+        body.classList.add('menu-open');
+        body.style.overflow = 'hidden';
+    }
+    
+    function closeMenu() {
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        body.classList.remove('menu-open');
+        body.style.overflow = '';
+    }
+    
+    menuToggle.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
-  });
+    
+    menuClose.addEventListener('click', closeMenu);
+    
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Add a slight delay to allow animation to complete
+            setTimeout(() => {
+                closeMenu();
+            }, 300);
+        });
+    });
+    
+    // Close menu when clicking outside
+    mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            closeMenu();
+        }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            closeMenu();
+        }
+    });
 }
 
 // Navigation
